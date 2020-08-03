@@ -5,10 +5,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: #28282d;
+  background-image: url("../public/background.png");
+  background-size: cover;
 }
 
 .main {
-  padding: 5rem 0;
+  padding: 0rem 0;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -28,6 +31,46 @@
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+}
+
+/* Style the tab buttons */
+.tablink {
+  background-color: #555;
+  color: white;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 17px;
+  width: 25%;
+}
+
+/* Change background color of buttons on hover */
+.tablink:hover {
+  background-color: #777;
+}
+
+/* Set default styles for tab content */
+.tabcontent {
+  color: white;
+  display: none;
+  padding: 50px;
+  text-align: center;
+}
+
+/* Style each tab content individually */
+#London {
+  background-color: red;
+}
+#Paris {
+  background-color: green;
+}
+#Tokyo {
+  background-color: blue;
+}
+#Oslo {
+  background-color: orange;
 }
 
 @media (max-width: 600px) {

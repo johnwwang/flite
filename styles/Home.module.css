@@ -33,45 +33,34 @@
   font-size: 16px;
 }
 
-/* Style the tab buttons */
-.tablink {
-  background-color: #555;
-  color: white;
+/* Add a black background color to the top navigation */
+.topnav {
+  background-color: #25252B;
+  overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
   float: left;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 14px 16px;
-  font-size: 17px;
-  width: 25%;
-}
-
-/* Change background color of buttons on hover */
-.tablink:hover {
-  background-color: #777;
-}
-
-/* Set default styles for tab content */
-.tabcontent {
-  color: white;
-  display: none;
-  padding: 50px;
+  color: #f2f2f2;
   text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
 }
 
-/* Style each tab content individually */
-#London {
-  background-color: red;
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: #ff684a;
 }
-#Paris {
-  background-color: green;
+
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: #ff684a;
+  color: white;
 }
-#Tokyo {
-  background-color: blue;
-}
-#Oslo {
-  background-color: orange;
-}
+
 
 @media (max-width: 600px) {
   .grid {

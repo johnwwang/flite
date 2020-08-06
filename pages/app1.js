@@ -7,7 +7,7 @@ import fetch from 'isomorphic-fetch'
 class AppPage extends Component {
   // fetch old messages data from the server
   static async getInitialProps({ req }) {
-    const response = await fetch('http://localhost:3000/messages')
+    const response = await fetch('http://localhost:3000/messages1')
     const messages = await response.json()
     return { messages }
   }
@@ -25,12 +25,12 @@ class AppPage extends Component {
   // connect to WS server and listen event
   componentDidMount() {
     this.socket = io('http://localhost:3000')
-    this.socket.on('message', this.handleMessage)
+    this.socket.on('message1', this.handleMessage)
   }
 
   // close socket connection
   componentWillUnmount() {
-    this.socket.off('message', this.handleMessage)
+    this.socket.off('message1', this.handleMessage)
     this.socket.close()
   }
 
@@ -54,7 +54,7 @@ class AppPage extends Component {
     }
 
     // send object to WS server
-    this.socket.emit('message', message)
+    this.socket.emit('message1', message)
 
     // add it to state and clean current input value
     this.setState(state => ({
@@ -68,29 +68,29 @@ class AppPage extends Component {
     return (
       <div>
         <Head>
-          <title>flite:app</title>
+          <title>Flite Chat</title>
         </Head>
         <main className={styles.main}>
           <h1 className={styles.title} style={{ color: "#ff684A" }}>
-            App
+            Chat 1
           </h1>
-          <div>
-          <ul>
-            {this.state.messages.map(message =>
-              <li key={message.id}>{message.value}</li>
-            )}
-          </ul>
-          <form onSubmit={this.handleSubmit}>
-            <input
-              onChange={this.handleChange}
-              type="text"
-              placeholder="Hello world!"
-              value={this.state.field}
-            />
-            <button>Send</button>
-          </form>
-        </div>
         </main>
+        <div>
+            <ul className={styles.messages}>
+              {this.state.messages.map(message =>
+                <li key={message.id}>{message.value}</li>
+              )}
+            </ul>
+            <form className={styles.form} onSubmit={this.handleSubmit}>
+              <input
+                onChange={this.handleChange}
+                type="text"
+                placeholder="Hello world!"
+                value={this.state.field}
+              />
+              <button>Send</button>
+            </form>
+          </div>
       </div>
     );
   }

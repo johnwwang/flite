@@ -17,8 +17,11 @@ export default function Home() {
         </h1>
         <img className={styles.logo} src="flightlogo.png"></img>
 
-        <Link href="/app">
-          <button className={styles.button}>enter</button>
+        <Link href="/app1">
+          <button className={styles.button}>enter 1</button>
+        </Link>
+        <Link href="/app2">
+          <button className={styles.button}>enter 2</button>
         </Link>
       </main>
     </div>

@@ -11,10 +11,14 @@ export default function About() {
         <link rel="icon" href="/birb.png" />
       </Head>
       <Header></Header>
-      <main className={styles.main}>
-        <h1 className={styles.title} style={{ color: "#ff684A" }}>
-          about
-        </h1>
+      <main className={styles.column}>
+      <img className={styles.logo} src="foresticon.png"></img>
+      </main>
+      <main className={styles.column}>
+      <img className={styles.logo} src="treeicon.png"></img>
+      </main>
+      <main className={styles.column}>
+      <img className={styles.logo} src="branchicon.png"></img>
       </main>
     </div>
   );

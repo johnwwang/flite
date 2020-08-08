@@ -14,16 +14,16 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 }
 
-.logo {
-  width: 25%;
+.icon {
+  width: 20%;
   height: auto;
 }
+
 .button {
-  background-color: #ff684a; /* Green */
+  background-color: #ff684a;
   border: none;
   color: white;
   padding: 10px 30px;
@@ -33,14 +33,34 @@
   font-size: 16px;
 }
 
+/* Create three equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 33.33%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other on smaller screens (600px wide or less) */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}
+
 /* Add a black background color to the top navigation */
 .topnav {
   background-color: #25252b;
   overflow: hidden;
   margin: 0px auto;
-  width: 100%;
   position: fixed;
   top: 0;
+  width: 100%;
 }
 .headericon {
   height: 16px;

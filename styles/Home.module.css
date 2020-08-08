@@ -45,12 +45,13 @@
   overflow: hidden;
   margin: 0px auto;
   width: 100%;
+  top: 0;
+  position: fixed;
 }
 .headericon {
   height: 16px;
 }
-.topnav#right {
-}
+
 /* Style the links inside the navigation bar */
 .topnav a {
   float: left;

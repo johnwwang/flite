@@ -1,36 +1,20 @@
-const mongoose = require("mongoose");
+import { MongoClient } from "mongodb";
+import nextConnect from "next-connect";
 
-mongoose.connect("mongodb://localhost:27017/ArtDB", {
+const client = new MongoClient(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  useFindAndModify: false,
 });
 
-const itemsSchema = {
-  id: String,
-  description: String,
-  path: String,
-  size: String,
-  price: Number,
-  sold: Boolean,
-};
-
-let Art;
-
-try {
-  // Trying to get the existing model to avoid OverwriteModelError
-  Art = mongoose.model("Art");
-} catch {
-  Art = mongoose.model("Art", itemsSchema);
+async function database(req, res, next) {
+  if (!client.isConnected()) await client.connect();
+  req.dbClient = client;
+  req.db = client.db("people");
+  return next();
 }
 
-export default (req, res) => {
-  Art.find({ sold: false }, (err, foundItems) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(foundItems);
-      res.status(200).json(foundItems);
-    }
-  });
-};
+const middleware = nextConnect();
+
+middleware.use(database);
+
+export default middleware;

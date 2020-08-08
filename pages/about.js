@@ -28,7 +28,7 @@ export default function About() {
                 <h2 className={styles.info} style={{ color: "#ff684A" }}>Branches</h2>
                 <main className={styles.main}>
                     <img className={styles.icon} src="branchicon.png"></img></main>
-                <h2 className={styles.info} style={{ color: "white" }}>Branches are the place for communication in Flite. Branches belong to trees and are all increasingly specific subtopics based upon the topic of their tree. For example, a Calculus tree would contain branches on Derivatives, Integrals, and limits. In these branches, you can participate in free-flowing discussion with experts, instructors, and fellow students to help better your understanding of the topics you need help with.</h2>
+                <h2 className={styles.info} style={{ color: "white" }}>Branches are the hub for communication in Flite. Branches belong to trees and are all increasingly specific subtopics based upon the topic of their tree. For example, a Calculus tree would contain branches on Derivatives, Integrals, and limits. In these branches, you can participate in free-flowing discussion with experts, instructors, and fellow students to help better your understanding of the topics you need help with.</h2>
             </div>
         </div>
     </div>

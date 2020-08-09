@@ -1,29 +1,13 @@
-const mongoose = require("mongoose");
+import nextConnect from "next-connect";
+import middleware from "../../middleware/database";
+import mongoose from "mongoose";
 
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false,
-});
-var Schema = mongoose.Schema;
+const handler = nextConnect();
 
-const personSchema = new Schema({
-  name: String,
-  age: Number,
-  favoriteFoods: [String],
-});
+handler.use(middleware);
 
-let Person;
-
-try {
-  // Trying to get the existing model to avoid OverwriteModelError
-  Person = mongoose.model("Person");
-} catch {
-  Person = mongoose.model("Person", personSchema);
-}
-
-export default (req, res) => {
-  Person.find({ name: "Bob" }, (err, foundPerson) => {
+handler.get(async (req, res) => {
+  await req.db.find({ name: "Bob" }, (err, foundPerson) => {
     if (err) {
       console.log(err);
     } else {
@@ -31,4 +15,6 @@ export default (req, res) => {
       res.status(200).json(foundPerson);
     }
   });
-};
+});
+
+export default (req, res) => handler.apply(req, res);

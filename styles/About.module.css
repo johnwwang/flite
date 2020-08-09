@@ -1,5 +1,6 @@
 .container {
   min-height: 100vh;
+  margin-left: 10vw;
   padding: 25px 0px;
   display: flex;
   flex-direction: column;
@@ -25,7 +26,6 @@
 .icon {
   width: 50%;
   height: auto;
-  
 }
 
 .info {
@@ -60,7 +60,7 @@
 }
 
 /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
-@media screen and (max-width:600px) {
+@media screen and (max-width: 600px) {
   .column {
     width: 100%;
   }
@@ -68,7 +68,7 @@
 
 /* Add a black background color to the top navigation */
 .topnav {
-  background-color: #25252C;
+  background-color: #25252c;
   overflow: hidden;
   margin: 0px auto;
   position: fixed;
@@ -100,7 +100,6 @@
   background-color: #ff684a;
   color: white;
 }
-
 
 @media (max-width: 600px) {
   .grid {

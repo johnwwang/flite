@@ -98,7 +98,7 @@ nextApp.prepare().then(() => {
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
   app.get("/messages0", (req, res) => {
-    console.log(messages[0])
+    console.log(messages[0]);
     res.json(messages[0]);
   });
   app.get("/messages1", (req, res) => {
@@ -144,7 +144,7 @@ nextApp.prepare().then(() => {
     res.json({ message: "yes" });
   });
 
-  server.listen(3000, (err) => {
+  server.listen(3000 || process.env.PORT, (err) => {
     if (err) throw err;
     console.log("> Ready on http://localhost:3000");
   });

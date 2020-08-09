@@ -9,10 +9,14 @@ class Header extends React.Component {
         <a>
           <img className={styles.headericon} src="birb.png"></img>
         </a>
-        <Link href="/"><a>Home</a></Link>
+        <Link href="/">
+          <a>Home</a>
+        </Link>
         <a href="#news">News</a>
         <a href="#contact">Contact</a>
-        <Link href="about"><a>About</a></Link>
+        <Link href="about">
+          <a>About</a>
+        </Link>
       </div>
     );
   }

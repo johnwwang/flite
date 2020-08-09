@@ -5,7 +5,7 @@ export default function Dbtest() {
   const updateMacros = async () => {
     const res = await fetch("http://localhost:3000/api/mongo", {
       method: "post",
-      body: JSON.stringify(results),
+      body: JSON.stringify({ name: "bob", age: 33 }),
     });
 
     console.log(res);
@@ -14,7 +14,7 @@ export default function Dbtest() {
     <div>
       <h1>Hello, HTML.</h1>
       <p>Do not use until Challenge #12</p>
-      <form action="localhost:3000/api/mongo" method="post">
+      <form action="/api/mongo" method="post">
         <label>name:</label>
         <input type="text" name="name" defaultValue="John" />
         <br />

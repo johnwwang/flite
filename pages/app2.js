@@ -4,6 +4,7 @@ import { Component } from "react";
 import io from "socket.io-client";
 import fetch from "isomorphic-fetch";
 import Sidebar from "../components/sidebar.js";
+import ChatHeader from "../components/chatheader.js";
 
 class AppPage extends Component {
   // fetch old messages data from the server
@@ -67,8 +68,11 @@ class AppPage extends Component {
   render() {
     return (
       <div>
+        {""}
+        <ChatHeader></ChatHeader>
         <Head>
           <title>Flite Chat</title>
+          <link rel="icon" href="/birb.png" />
         </Head>
         <Sidebar></Sidebar>
         <main className={styles.main}>
@@ -96,5 +100,3 @@ class AppPage extends Component {
     );
   }
 }
-
-export default AppPage;

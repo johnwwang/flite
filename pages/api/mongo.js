@@ -17,20 +17,13 @@ handler.get(async (req, res) => {
   });
 });
 
-handler.post(async (req, res) => {
-  let data = req.body;
-  data = JSON.parse(data);
-  await req.db.create(
-    { name: "chill", age: 10, favoriteFoods: ["beans"] },
-    function (err, people) {
-      if (err) {
-        console.log("error");
-      } else {
-        console.log(people);
-      }
-    }
-  );
-
-  res.json({ message: "ok" });
+handler.post((req, res) => {
+  console.log(req.body.name);
+  const newperson = new req.db({ name: req.body.name, age: req.body.age });
+  newperson.save(function (err, ppl) {
+    if (err) return console.log("err");
+    res.json({ yes: "success" });
+  });
 });
+
 export default (req, res) => handler.apply(req, res);

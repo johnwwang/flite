@@ -19,10 +19,10 @@ export default function Home() {
           </h1>
           <img className={styles.logo} src="flightlogo.png"></img>
           <div className={styles.buttonflex}>
-            <Link href="/app1">
+            <Link href="/app">
               <button className={styles.button}>enter 1</button>
             </Link>
-            <Link href="/app2">
+            <Link href="/app1">
               <button className={styles.button}>enter 2</button>
             </Link>
           </div>

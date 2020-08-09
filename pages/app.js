@@ -9,7 +9,7 @@ import ChatHeader from "../components/chatheader.js";
 class AppPage extends Component {
   // fetch old messages data from the server
   static async getInitialProps({ req }) {
-    const response = await fetch("http://localhost:3000/messages2");
+    const response = await fetch("http://localhost:3000/messages");
     const messages = await response.json();
     return { messages };
   }
@@ -27,12 +27,12 @@ class AppPage extends Component {
   // connect to WS server and listen event
   componentDidMount() {
     this.socket = io("http://localhost:3000");
-    this.socket.on("message2", this.handleMessage);
+    this.socket.on("messages", this.handleMessage);
   }
 
   // close socket connection
   componentWillUnmount() {
-    this.socket.off("message2", this.handleMessage);
+    this.socket.off("messages", this.handleMessage);
     this.socket.close();
   }
 
@@ -47,37 +47,38 @@ class AppPage extends Component {
 
   // send messages to server and add them to the state
   handleSubmit = (event) => {
-    event.preventDefault();
+    if (this.state.field.length != 0) {
+      event.preventDefault();
 
-    // create message object
-    const message = {
-      id: new Date().getTime(),
-      value: this.state.field,
-    };
+      // create message object
+      const message = {
+        id: new Date().getTime(),
+        value: this.state.field,
+      };
 
-    // send object to WS server
-    this.socket.emit("message2", message);
+      // send object to WS server
+      this.socket.emit("messages", message);
 
-    // add it to state and clean current input value
-    this.setState((state) => ({
-      field: "",
-      messages: state.messages.concat(message),
-    }));
+      // add it to state and clean current input value
+      this.setState((state) => ({
+        field: "",
+        messages: state.messages.concat(message),
+      }));
+    }
   };
 
   render() {
     return (
-      <div>
+      <div className={styles.chatcontainer}>
         {""}
         <ChatHeader></ChatHeader>
         <Head>
           <title>Flite Chat</title>
-          <link rel="icon" href="/birb.png" />
         </Head>
         <Sidebar></Sidebar>
         <main className={styles.main}>
           <h1 className={styles.title} style={{ color: "#ff684A" }}>
-            Chat 2
+            Chat 1
           </h1>
         </main>
         <div>
@@ -100,3 +101,5 @@ class AppPage extends Component {
     );
   }
 }
+
+export default AppPage;

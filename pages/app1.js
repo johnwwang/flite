@@ -47,38 +47,37 @@ class AppPage extends Component {
 
   // send messages to server and add them to the state
   handleSubmit = (event) => {
-    if (this.state.field.length != 0) {
-      event.preventDefault();
+    event.preventDefault();
 
-      // create message object
-      const message = {
-        id: new Date().getTime(),
-        value: this.state.field,
-      };
+    // create message object
+    const message = {
+      id: new Date().getTime(),
+      value: this.state.field,
+    };
 
-      // send object to WS server
-      this.socket.emit("message1", message);
+    // send object to WS server
+    this.socket.emit("message1", message);
 
-      // add it to state and clean current input value
-      this.setState((state) => ({
-        field: "",
-        messages: state.messages.concat(message),
-      }));
-    }
+    // add it to state and clean current input value
+    this.setState((state) => ({
+      field: "",
+      messages: state.messages.concat(message),
+    }));
   };
 
   render() {
     return (
-      <div>
+      <div className={styles.chatcontainer}>
         {""}
         <ChatHeader></ChatHeader>
         <Head>
           <title>Flite Chat</title>
+          <link rel="icon" href="/birb.png" />
         </Head>
         <Sidebar></Sidebar>
         <main className={styles.main}>
           <h1 className={styles.title} style={{ color: "#ff684A" }}>
-            Chat 1
+            Chat 2
           </h1>
         </main>
         <div>
@@ -101,5 +100,4 @@ class AppPage extends Component {
     );
   }
 }
-
 export default AppPage;

@@ -3,11 +3,15 @@ import styles from "../styles/Home.module.css";
 import { Component } from "react";
 import io from "socket.io-client";
 import fetch from "isomorphic-fetch";
+import Sidebar from "../components/sidebar.js";
+import ChatHeader from "../components/chatheader.js";
 
-class AppPage extends Component {
+class Chat extends Component({ props }) {
   // fetch old messages data from the server
   static async getInitialProps({ req }) {
-    const response = await fetch("http://localhost:3000/messages1");
+    const response = await fetch(
+      "http://localhost:3000/messages" + props.number.toString()
+    );
     const messages = await response.json();
     return { messages };
   }
@@ -25,12 +29,12 @@ class AppPage extends Component {
   // connect to WS server and listen event
   componentDidMount() {
     this.socket = io("http://localhost:3000");
-    this.socket.on("message1", this.handleMessage);
+    this.socket.on("messages" + props.number.toString(), this.handleMessage);
   }
 
   // close socket connection
   componentWillUnmount() {
-    this.socket.off("message1", this.handleMessage);
+    this.socket.off("messages" + props.number.toString(), this.handleMessage);
     this.socket.close();
   }
 
@@ -55,7 +59,7 @@ class AppPage extends Component {
       };
 
       // send object to WS server
-      this.socket.emit("message1", message);
+      this.socket.emit("messages" + props.number.toString(), message);
 
       // add it to state and clean current input value
       this.setState((state) => ({
@@ -67,10 +71,13 @@ class AppPage extends Component {
 
   render() {
     return (
-      <div>
+      <div className={styles.chatcontainer}>
+        {""}
+        <ChatHeader></ChatHeader>
         <Head>
           <title>Flite Chat</title>
         </Head>
+        <Sidebar></Sidebar>
         <main className={styles.main}>
           <h1 className={styles.title} style={{ color: "#ff684A" }}>
             Chat 1
@@ -86,7 +93,7 @@ class AppPage extends Component {
             <input
               onChange={this.handleChange}
               type="text"
-              placeholder="Hello world!"
+              placeholder="gec gec"
               value={this.state.field}
             />
             <button>Send</button>
@@ -97,4 +104,4 @@ class AppPage extends Component {
   }
 }
 
-export default AppPage;
+export default Chat;

@@ -10,6 +10,11 @@
   background-size: cover;
 }
 
+.chatcontainer {
+  margin-left: 10vw;
+  margin-top: 6vh;
+}
+
 .main {
   padding: 0rem 0;
   flex: 1;
@@ -43,6 +48,7 @@
   background-color: #25252b;
   overflow: hidden;
   margin: 0px auto;
+  height: 6vh;
   width: 100%;
   top: 0;
   position: fixed;

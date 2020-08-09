@@ -9,8 +9,8 @@ const nextApp = next({ dev });
 const nextHandler = nextApp.getRequestHandler();
 
 // fake DB
-const messages1 = [];
-const messages2 = [];
+const messages = [[], [], [], [], [], [], [], [], [], [], [], []];
+
 //connect to real DB
 async function database(req, res, next) {
   var db = mongoose.connect(
@@ -39,13 +39,13 @@ async function database(req, res, next) {
 }
 // socket.io server
 io.on("connection", (socket) => {
-  socket.on("message1", (data) => {
-    messages1.push(data);
-    socket.broadcast.emit("message1", data);
+  socket.on("messages", (data) => {
+    messages[0].push(data);
+    socket.broadcast.emit("messages", data);
   });
-  socket.on("message2", (data) => {
-    messages1.push(data);
-    socket.broadcast.emit("message2", data);
+  socket.on("messages1", (data) => {
+    messages[1].push(data);
+    socket.broadcast.emit("messages1", data);
   });
 });
 
@@ -57,11 +57,41 @@ nextApp.prepare().then(() => {
 
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
+  app.get("/messages", (req, res) => {
+    res.json(messages[0]);
+  });
   app.get("/messages1", (req, res) => {
-    res.json(messages1);
+    res.json(messages[1]);
   });
   app.get("/messages2", (req, res) => {
-    res.json(messages2);
+    res.json(messages[2]);
+  });
+  app.get("/messages3", (req, res) => {
+    res.json(messages[3]);
+  });
+  app.get("/messages4", (req, res) => {
+    res.json(messages[4]);
+  });
+  app.get("/messages5", (req, res) => {
+    res.json(messages[5]);
+  });
+  app.get("/messages6", (req, res) => {
+    res.json(messages[6]);
+  });
+  app.get("/messages7", (req, res) => {
+    res.json(messages[7]);
+  });
+  app.get("/messages8", (req, res) => {
+    res.json(messages[8]);
+  });
+  app.get("/messages9", (req, res) => {
+    res.json(messages[9]);
+  });
+  app.get("/messages10", (req, res) => {
+    res.json(messages[10]);
+  });
+  app.get("/messages11", (req, res) => {
+    res.json(messages[11]);
   });
   app.get("*", (req, res) => {
     return nextHandler(req, res);

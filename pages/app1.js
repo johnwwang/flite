@@ -70,10 +70,11 @@ class AppPage extends Component {
   render() {
     return (
       <div>
+        {""}
+        <ChatHeader></ChatHeader>
         <Head>
           <title>Flite Chat</title>
         </Head>
-        <ChatHeader></ChatHeader>
         <Sidebar></Sidebar>
         <main className={styles.main}>
           <h1 className={styles.title} style={{ color: "#ff684A" }}>

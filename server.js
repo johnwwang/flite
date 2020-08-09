@@ -98,6 +98,7 @@ nextApp.prepare().then(() => {
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
   app.get("/messages0", (req, res) => {
+    console.log(messages[0])
     res.json(messages[0]);
   });
   app.get("/messages1", (req, res) => {

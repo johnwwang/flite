@@ -72,14 +72,14 @@ class AppPage extends Component {
       <div className={styles.chatcontainer}>
         {""}
         <ChatHeader></ChatHeader>
+        <Sidebar></Sidebar>
         <Head>
           <title>Flite Chat</title>
           <link rel="icon" href="/birb.png" />
         </Head>
-        <Sidebar></Sidebar>
         <main className={styles.main}>
           <h1 className={styles.title} style={{ color: "#ff684A" }}>
-            Chat 2
+            Linear Equations
           </h1>
         </main>
         <div>
@@ -102,4 +102,5 @@ class AppPage extends Component {
     );
   }
 }
+
 export default AppPage;

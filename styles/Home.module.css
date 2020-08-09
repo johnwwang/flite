@@ -11,8 +11,10 @@
 }
 
 .chatcontainer {
+  background: #2c2c35;
   margin-left: 10vw;
   margin-top: 6vh;
+  color: white;
 }
 
 .main {
@@ -88,7 +90,7 @@
 }
 
 .form {
-  background: #000;
+  background-color: #25252b;
   padding: 3px;
   position: fixed;
   bottom: 0;
@@ -96,6 +98,8 @@
 }
 
 .form input {
+  background: #31313a;
+  color: white;
   border: 0;
   padding: 10px;
   width: 90%;
@@ -109,10 +113,14 @@
   padding: 10px;
 }
 
+.form:input-within label{
+
+}
+
 .messages {
   list-style-type: none;
-  margin: 0;
-  padding: 0;
+  margin: 0px;
+  padding: 0px;
 }
 
 .messages li {
@@ -120,7 +128,7 @@
 }
 
 .messages li:nth-child(odd) {
-  background: #ffebe7;
+  background: #31313a;
 }
 
 /* The side navigation menu */

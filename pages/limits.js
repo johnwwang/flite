@@ -9,7 +9,7 @@ import ChatHeader from "../components/chatheader.js";
 class AppPage extends Component {
   // fetch old messages data from the server
   static async getInitialProps({ req }) {
-    const response = await fetch("http://localhost:3000/messages1");
+    const response = await fetch("http://localhost:3000/messages7");
     const messages = await response.json();
     return { messages };
   }
@@ -27,12 +27,12 @@ class AppPage extends Component {
   // connect to WS server and listen event
   componentDidMount() {
     this.socket = io("http://localhost:3000");
-    this.socket.on("messages1", this.handleMessage);
+    this.socket.on("messages7", this.handleMessage);
   }
 
   // close socket connection
   componentWillUnmount() {
-    this.socket.off("messages1", this.handleMessage);
+    this.socket.off("messages7", this.handleMessage);
     this.socket.close();
   }
 
@@ -57,7 +57,7 @@ class AppPage extends Component {
       };
 
       // send object to WS server
-      this.socket.emit("messages1", message);
+      this.socket.emit("messages7", message);
 
       // add it to state and clean current input value
       this.setState((state) => ({
@@ -72,14 +72,14 @@ class AppPage extends Component {
       <div className={styles.chatcontainer}>
         {""}
         <ChatHeader></ChatHeader>
+        <Sidebar></Sidebar>
         <Head>
           <title>Flite Chat</title>
           <link rel="icon" href="/birb.png" />
         </Head>
-        <Sidebar></Sidebar>
         <main className={styles.main}>
           <h1 className={styles.title} style={{ color: "#ff684A" }}>
-            Chat 2
+            Limits
           </h1>
         </main>
         <div>
@@ -102,4 +102,5 @@ class AppPage extends Component {
     );
   }
 }
+
 export default AppPage;

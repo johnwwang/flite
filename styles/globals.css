@@ -5,6 +5,7 @@ body {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
   height: 100%;
+  background: #2c2c35;
 }
 
 a {
@@ -14,4 +15,5 @@ a {
 
 * {
   box-sizing: border-box;
+  
 }

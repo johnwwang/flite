@@ -7,7 +7,7 @@ class Header extends React.Component {
     return (
       <div className={styles.topnav}>
         <a>
-          <img className={styles.headericon} src="birb.png"></img>
+          <img className={styles.headericon} src="flitebird.gif"></img>
         </a>
         <Link href="/">
           <a>Home</a>

@@ -39,13 +39,53 @@ async function database(req, res, next) {
 }
 // socket.io server
 io.on("connection", (socket) => {
-  socket.on("messages", (data) => {
+  socket.on("messages0", (data) => {
     messages[0].push(data);
-    socket.broadcast.emit("messages", data);
+    socket.broadcast.emit("messages0", data);
   });
   socket.on("messages1", (data) => {
     messages[1].push(data);
     socket.broadcast.emit("messages1", data);
+  });
+  socket.on("messages2", (data) => {
+    messages[2].push(data);
+    socket.broadcast.emit("messages2", data);
+  });
+  socket.on("messages3", (data) => {
+    messages[3].push(data);
+    socket.broadcast.emit("messages3", data);
+  });
+  socket.on("messages4", (data) => {
+    messages[4].push(data);
+    socket.broadcast.emit("messages4", data);
+  });
+  socket.on("messages5", (data) => {
+    messages[5].push(data);
+    socket.broadcast.emit("messages5", data);
+  });
+  socket.on("messages6", (data) => {
+    messages[6].push(data);
+    socket.broadcast.emit("messages6", data);
+  });
+  socket.on("messages7", (data) => {
+    messages[7].push(data);
+    socket.broadcast.emit("messages7", data);
+  });
+  socket.on("messages8", (data) => {
+    messages[8].push(data);
+    socket.broadcast.emit("messages8", data);
+  });
+  socket.on("messages9", (data) => {
+    messages[9].push(data);
+    socket.broadcast.emit("messages9", data);
+  });
+  socket.on("messages10", (data) => {
+    messages[10].push(data);
+    socket.broadcast.emit("messages10", data);
+  });
+  socket.on("messages11", (data) => {
+    messages[11].push(data);
+    socket.broadcast.emit("messages11", data);
   });
 });
 
@@ -57,7 +97,7 @@ nextApp.prepare().then(() => {
 
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
-  app.get("/messages", (req, res) => {
+  app.get("/messages0", (req, res) => {
     res.json(messages[0]);
   });
   app.get("/messages1", (req, res) => {

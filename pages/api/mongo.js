@@ -17,4 +17,20 @@ handler.get(async (req, res) => {
   });
 });
 
+handler.post(async (req, res) => {
+  let data = req.body;
+  data = JSON.parse(data);
+  await req.db.create(
+    { name: "chill", age: 10, favoriteFoods: ["beans"] },
+    function (err, people) {
+      if (err) {
+        console.log("error");
+      } else {
+        console.log(people);
+      }
+    }
+  );
+
+  res.json({ message: "ok" });
+});
 export default (req, res) => handler.apply(req, res);

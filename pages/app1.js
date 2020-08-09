@@ -3,6 +3,7 @@ import styles from "../styles/Home.module.css";
 import { Component } from "react";
 import io from "socket.io-client";
 import fetch from "isomorphic-fetch";
+import Sidebar from "../components/sidebar.js";
 
 class AppPage extends Component {
   // fetch old messages data from the server
@@ -71,6 +72,7 @@ class AppPage extends Component {
         <Head>
           <title>Flite Chat</title>
         </Head>
+        <Sidebar></Sidebar>
         <main className={styles.main}>
           <h1 className={styles.title} style={{ color: "#ff684A" }}>
             Chat 1

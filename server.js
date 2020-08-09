@@ -144,7 +144,7 @@ nextApp.prepare().then(() => {
     res.json({ message: "yes" });
   });
 
-  server.listen(3000 || process.env.PORT, (err) => {
+  server.listen(process.env.PORT || 5000, (err) => {
     if (err) throw err;
     console.log("> Ready on http://localhost:3000");
   });

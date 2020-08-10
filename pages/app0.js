@@ -9,7 +9,7 @@ import ChatHeader from "../components/chatheader.js";
 class AppPage extends Component {
   // fetch old messages data from the server
   static async getInitialProps({ req }) {
-    const response = await fetch(
+    const response = fetch(
       "https://arcane-island-41434.herokuapp.com/messages0"
     );
     const messages = await response.json();

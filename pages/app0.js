@@ -9,7 +9,9 @@ import ChatHeader from "../components/chatheader.js";
 class AppPage extends Component {
   // fetch old messages data from the server
   static async getInitialProps({ req }) {
-    const response = await fetch("http://localhost:3000/messages0");
+    const response = await fetch(
+      "https://arcane-island-41434.herokuapp.com/messages0"
+    );
     const messages = await response.json();
     return { messages };
   }
@@ -26,7 +28,7 @@ class AppPage extends Component {
 
   // connect to WS server and listen event
   componentDidMount() {
-    this.socket = io("http://localhost:3000");
+    this.socket = io("https://arcane-island-41434.herokuapp.com");
     this.socket.on("messages0", this.handleMessage);
   }
 

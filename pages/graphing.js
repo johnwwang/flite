@@ -4,12 +4,13 @@ import { Component } from "react";
 import io from "socket.io-client";
 import fetch from "isomorphic-fetch";
 import Sidebar from "../components/sidebar.js";
+import ChatSidebar from "../components/chatsidebar.js";
 import ChatHeader from "../components/chatheader.js";
 
 class AppPage extends Component {
   // fetch old messages data from the server
   static async getInitialProps({ req }) {
-    const response = await fetch("http://localhost:3000/messages0");
+    const response = await fetch(process.env.BASE_URL + "/messages0");
     const messages = await response.json();
     return { messages };
   }
@@ -26,8 +27,9 @@ class AppPage extends Component {
 
   // connect to WS server and listen event
   componentDidMount() {
-    this.socket = io("http://localhost:3000");
+    this.socket = io(process.env.BASE_URL);
     this.socket.on("messages0", this.handleMessage);
+    this.socket.on("clear messages", this.handleClear);
   }
 
   // close socket connection
@@ -45,11 +47,20 @@ class AppPage extends Component {
     this.setState({ field: event.target.value });
   };
 
+  handleReset = () => {
+    this.socket.emit("reset");
+    this.setState((state) => ({ messages: (state.messages = []) }));
+  };
+
+  handleClear = () => {
+    event.preventDefault();
+    this.setState((state) => ({ messages: (state.messages = []) }));
+  };
+
   // send messages to server and add them to the state
   handleSubmit = (event) => {
+    event.preventDefault();
     if (this.state.field.length != 0) {
-      event.preventDefault();
-
       // create message object
       const message = {
         id: new Date().getTime(),
@@ -71,7 +82,7 @@ class AppPage extends Component {
     return (
       <div className={styles.chatcontainer}>
         {""}
-        <ChatHeader></ChatHeader>
+        <ChatHeader handleReset={this.handleReset}></ChatHeader>
         <Sidebar></Sidebar>
         <Head>
           <title>Flite Chat</title>
@@ -79,7 +90,7 @@ class AppPage extends Component {
         </Head>
         <main className={styles.main}>
           <h1 className={styles.title} style={{ color: "#ff684A" }}>
-            Chat 1
+            Graphing
           </h1>
         </main>
         <div>
@@ -89,13 +100,13 @@ class AppPage extends Component {
             ))}
           </ul>
           <form className={styles.form} onSubmit={this.handleSubmit}>
+            {/* <button onClick = {this.handleReset}>Reset</button> */}
             <input
               onChange={this.handleChange}
               type="text"
               placeholder="Hello world!"
               value={this.state.field}
             />
-            <button>Send</button>
           </form>
         </div>
       </div>

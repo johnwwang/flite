@@ -9,7 +9,7 @@ const nextApp = next({ dev });
 const nextHandler = nextApp.getRequestHandler();
 
 // fake DB
-const messages = [[], [], [], [], [], [], [], [], [], [], [], []];
+var messages = [[], [], [], [], [], [], [], [], [], [], [], []];
 
 //connect to real DB
 async function database(req, res, next) {
@@ -39,6 +39,10 @@ async function database(req, res, next) {
 }
 // socket.io server
 io.on("connection", (socket) => {
+  socket.on("reset", () => {
+    messages = [[], [], [], [], [], [], [], [], [], [], [], []];
+    socket.broadcast.emit("clear messages");
+  });
   socket.on("messages0", (data) => {
     messages[0].push(data);
     socket.broadcast.emit("messages0", data);
@@ -98,7 +102,6 @@ nextApp.prepare().then(() => {
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
   app.get("/messages0", (req, res) => {
-    console.log(messages[0]);
     res.json(messages[0]);
   });
   app.get("/messages1", (req, res) => {
@@ -133,6 +136,9 @@ nextApp.prepare().then(() => {
   });
   app.get("/messages11", (req, res) => {
     res.json(messages[11]);
+  });
+  app.get("/erasemesages", (req, res) => {
+    res.status(200).json({ ok: "yes" });
   });
   app.get("*", (req, res) => {
     return nextHandler(req, res);

@@ -9,7 +9,7 @@ import ChatHeader from "../components/chatheader.js";
 class AppPage extends Component {
   // fetch old messages data from the server
   static async getInitialProps({ req }) {
-    const response = await fetch("http://localhost:3000/messages1");
+    const response = await fetch(process.env.BASE_URL + "/messages1");
     const messages = await response.json();
     return { messages };
   }
@@ -26,7 +26,7 @@ class AppPage extends Component {
 
   // connect to WS server and listen event
   componentDidMount() {
-    this.socket = io("http://localhost:3000");
+    this.socket = io(process.env.BASE_URL);
     this.socket.on("messages1", this.handleMessage);
   }
 
@@ -71,7 +71,7 @@ class AppPage extends Component {
     return (
       <div className={styles.chatcontainer}>
         {""}
-        <ChatHeader></ChatHeader>
+        <ChatHeader handleReset={this.handleReset}></ChatHeader>
         <Head>
           <title>Flite Chat</title>
           <link rel="icon" href="/birb.png" />
@@ -95,11 +95,11 @@ class AppPage extends Component {
               placeholder="Hello world!"
               value={this.state.field}
             />
-            <button>Send</button>
           </form>
         </div>
       </div>
     );
   }
 }
+
 export default AppPage;

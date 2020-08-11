@@ -9,10 +9,8 @@ import ChatHeader from "../components/chatheader.js";
 class AppPage extends Component {
   // fetch old messages data from the server
   static async getInitialProps({ req }) {
-    const response = fetch(
-      "https://arcane-island-41434.herokuapp.com/messages0"
-    );
-    const messages = await response.json();
+    const response = await fetch("http://localhost:3000/messages0");
+    var messages = await response.json();
     return { messages };
   }
 
@@ -28,8 +26,10 @@ class AppPage extends Component {
 
   // connect to WS server and listen event
   componentDidMount() {
-    this.socket = io("https://arcane-island-41434.herokuapp.com");
+    this.socket = io("http://localhost:3000");
+
     this.socket.on("messages0", this.handleMessage);
+    this.socket.on("clear messages", this.handleClear);
   }
 
   // close socket connection
@@ -47,11 +47,20 @@ class AppPage extends Component {
     this.setState({ field: event.target.value });
   };
 
+  handleReset = () => {
+    this.socket.emit("reset");
+    this.setState((state) => ({ messages: (state.messages = []) }));
+  };
+
+  handleClear = () => {
+    event.preventDefault();
+    this.setState((state) => ({ messages: (state.messages = []) }));
+  };
+
   // send messages to server and add them to the state
   handleSubmit = (event) => {
+    event.preventDefault();
     if (this.state.field.length != 0) {
-      event.preventDefault();
-
       // create message object
       const message = {
         id: new Date().getTime(),
@@ -73,7 +82,7 @@ class AppPage extends Component {
     return (
       <div className={styles.chatcontainer}>
         {""}
-        <ChatHeader></ChatHeader>
+        <ChatHeader handleReset={this.handleReset}></ChatHeader>
         <Sidebar></Sidebar>
         <Head>
           <title>Flite Chat</title>
@@ -97,7 +106,6 @@ class AppPage extends Component {
               placeholder="Hello world!"
               value={this.state.field}
             />
-            <button>Send</button>
           </form>
         </div>
       </div>

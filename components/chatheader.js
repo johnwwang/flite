@@ -7,7 +7,7 @@ class ChatHeader extends React.Component {
     return (
       <div className={styles.topnav}>
         <a>
-          <img className={styles.headericon} src="flitebird.gif"></img>
+          <img className={styles.headericon} src="/flitebird.gif"></img>
         </a>
         <Link href="/math">
           <a>Lobby</a>
@@ -15,6 +15,9 @@ class ChatHeader extends React.Component {
         <Link href="/about">
           <a>About</a>
         </Link>
+        <span className={styles.topnavright}>
+          <a onClick={this.props.handleReset}>Reset</a>
+        </span>
       </div>
     );
   }

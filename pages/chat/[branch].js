@@ -1,17 +1,19 @@
+import { withRouter } from "next/router";
+import Link from "next/link";
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
+import styles from "../../styles/Home.module.css";
 import { Component } from "react";
 import io from "socket.io-client";
 import fetch from "isomorphic-fetch";
-import Sidebar from "../components/sidebar.js";
-import ChatSidebar from "../components/chatsidebar.js";
-import ChatHeader from "../components/chatheader.js";
+import Sidebar from "../../components/sidebar.js";
+import ChatSidebar from "../../components/chatsidebar.js";
+import ChatHeader from "../../components/chatheader.js";
 
-class AppPage extends Component {
+class ChatPage extends Component {
   // fetch old messages data from the server
   static async getInitialProps({ req }) {
-    const response = await fetch(process.env.BASE_URL + "/messages1");
-    const messages = await response.json();
+    const response = await fetch("http://localhost:3000/messages0");
+    var messages = await response.json();
     return { messages };
   }
 
@@ -27,14 +29,15 @@ class AppPage extends Component {
 
   // connect to WS server and listen event
   componentDidMount() {
-    this.socket = io(process.env.BASE_URL);
-    this.socket.on("messages1", this.handleMessage);
+    this.socket = io("http://localhost:3000");
+
+    this.socket.on("messages0", this.handleMessage);
     this.socket.on("clear messages", this.handleClear);
   }
 
   // close socket connection
   componentWillUnmount() {
-    this.socket.off("messages1", this.handleMessage);
+    this.socket.off("messages0", this.handleMessage);
     this.socket.close();
   }
 
@@ -68,7 +71,7 @@ class AppPage extends Component {
       };
 
       // send object to WS server
-      this.socket.emit("messages1", message);
+      this.socket.emit("messages0", message);
 
       // add it to state and clean current input value
       this.setState((state) => ({
@@ -90,7 +93,7 @@ class AppPage extends Component {
         </Head>
         <main className={styles.main}>
           <h1 className={styles.title} style={{ color: "#ff684A" }}>
-            Linear Equations
+            {this.props.router.query.branch}
           </h1>
         </main>
         <div>
@@ -100,7 +103,6 @@ class AppPage extends Component {
             ))}
           </ul>
           <form className={styles.form} onSubmit={this.handleSubmit}>
-            {/* <button onClick = {this.handleReset}>Reset</button> */}
             <input
               onChange={this.handleChange}
               type="text"
@@ -113,5 +115,4 @@ class AppPage extends Component {
     );
   }
 }
-
-export default AppPage;
+export default withRouter(ChatPage);

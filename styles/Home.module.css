@@ -57,7 +57,7 @@
   z-index: 999;
 }
 .headericon {
-  height: 16px;
+  height: 32px;
 }
 
 /* Style the links inside the navigation bar */
@@ -111,10 +111,6 @@
   background: #ff684a;
   border: none;
   padding: 10px;
-}
-
-.form:input-within label{
-
 }
 
 .messages {

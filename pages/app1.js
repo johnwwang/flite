@@ -44,11 +44,18 @@ class AppPage extends Component {
   handleChange = (event) => {
     this.setState({ field: event.target.value });
   };
-
+  handleReset = () => {	
+    this.socket.emit("reset");	
+    this.setState((state) => ({ messages: (state.messages = []) }));	
+  };	
+  handleClear = () => {	
+    event.preventDefault();	
+    this.setState((state) => ({ messages: (state.messages = []) }));	
+  };
   // send messages to server and add them to the state
   handleSubmit = (event) => {
+    event.preventDefault();
     if (this.state.field.length != 0) {
-      event.preventDefault();
 
       // create message object
       const message = {
@@ -72,11 +79,11 @@ class AppPage extends Component {
       <div className={styles.chatcontainer}>
         {""}
         <ChatHeader handleReset={this.handleReset}></ChatHeader>
+        <Sidebar></Sidebar>
         <Head>
           <title>Flite Chat</title>
           <link rel="icon" href="/birb.png" />
         </Head>
-        <Sidebar></Sidebar>
         <main className={styles.main}>
           <h1 className={styles.title} style={{ color: "#ff684A" }}>
             Chat 2

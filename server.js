@@ -85,6 +85,7 @@ function handlePoll(pollArgs, chatID, socket) {
     response.value.slice(0, -2);
     messages[chatID].push(response);
     socket.broadcast.emit("messages" + chatID, response);
+    socket.emit("messages" + chatID, response);
     setTimeout(function () {
       handlePollEnd(chatID, socket);
     }, 10000);
@@ -95,6 +96,7 @@ function handlePoll(pollArgs, chatID, socket) {
 
   messages[chatID].push(response);
   socket.broadcast.emit("messages" + chatID, response);
+  socket.emit("messages" + chatID, response);
 }
 
 function handlePollEnd(chatID, socket) {
@@ -110,6 +112,7 @@ function handlePollEnd(chatID, socket) {
   };
   messages[chatID].push(response);
   socket.broadcast.emit("messages" + chatID, response);
+  socket.emit("messages" + chatID, response);
   return;
 }
 

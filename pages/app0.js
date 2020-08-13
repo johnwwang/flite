@@ -4,13 +4,14 @@ import { Component } from "react";
 import io from "socket.io-client";
 import fetch from "isomorphic-fetch";
 import Sidebar from "../components/sidebar.js";
+import ChatSidebar from "../components/chatsidebar.js";
 import ChatHeader from "../components/chatheader.js";
 
 class AppPage extends Component {
   // fetch old messages data from the server
   static async getInitialProps({ req }) {
-    const response = await fetch("http://localhost:3000/messages0");
-    var messages = await response.json();
+    const response = await fetch(process.env.BASE_URL + "/messages0");
+    const messages = await response.json();
     return { messages };
   }
 
@@ -26,8 +27,7 @@ class AppPage extends Component {
 
   // connect to WS server and listen event
   componentDidMount() {
-    this.socket = io("http://localhost:3000");
-
+    this.socket = io(process.env.BASE_URL);
     this.socket.on("messages0", this.handleMessage);
     this.socket.on("clear messages", this.handleClear);
   }
@@ -100,6 +100,7 @@ class AppPage extends Component {
             ))}
           </ul>
           <form className={styles.form} onSubmit={this.handleSubmit}>
+            {/* <button onClick = {this.handleReset}>Reset</button> */}
             <input
               onChange={this.handleChange}
               type="text"

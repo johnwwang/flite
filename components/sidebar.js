@@ -6,10 +6,15 @@ class Sidebar extends React.Component {
   render() {
     return (
       <div className={styles.sidenav}>
-        <a href="/app0">Branch 1</a>
-        <a href="/app1">Branch 2</a>
-        <a href="#">Clients</a>
-        <a href="#">Contact</a>
+        <Link href="/app0">
+          <a>Branch 1</a>
+        </Link>
+        <Link href="/app1">
+          <a>Branch 2</a>
+        </Link>
+        <Link href="/createbranch">
+          <a>Create a Branch</a>
+        </Link>
       </div>
     );
   }

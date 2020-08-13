@@ -100,7 +100,7 @@ class AppPage extends Component {
             ))}
           </ul>
           <form className={styles.form} onSubmit={this.handleSubmit}>
-            <button onClick={this.handleReset}>Reset</button>
+            {/* <button onClick = {this.handleReset}>Reset</button> */}
             <input
               onChange={this.handleChange}
               type="text"

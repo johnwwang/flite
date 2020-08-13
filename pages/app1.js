@@ -4,6 +4,7 @@ import { Component } from "react";
 import io from "socket.io-client";
 import fetch from "isomorphic-fetch";
 import Sidebar from "../components/sidebar.js";
+import ChatSidebar from "../components/chatsidebar.js";
 import ChatHeader from "../components/chatheader.js";
 
 class AppPage extends Component {
@@ -44,19 +45,18 @@ class AppPage extends Component {
   handleChange = (event) => {
     this.setState({ field: event.target.value });
   };
-  handleReset = () => {	
-    this.socket.emit("reset");	
-    this.setState((state) => ({ messages: (state.messages = []) }));	
-  };	
-  handleClear = () => {	
-    event.preventDefault();	
-    this.setState((state) => ({ messages: (state.messages = []) }));	
+  handleReset = () => {
+    this.socket.emit("reset");
+    this.setState((state) => ({ messages: (state.messages = []) }));
+  };
+  handleClear = () => {
+    event.preventDefault();
+    this.setState((state) => ({ messages: (state.messages = []) }));
   };
   // send messages to server and add them to the state
   handleSubmit = (event) => {
     event.preventDefault();
     if (this.state.field.length != 0) {
-
       // create message object
       const message = {
         id: new Date().getTime(),

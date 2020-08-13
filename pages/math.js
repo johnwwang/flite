@@ -12,7 +12,7 @@ export default function MathLobby() {
       <div className={styles.chatcontainer}>
         <main className={styles.main}>
           <h1 className={styles.title} style={{ color: "#ff684A" }}>
-            welcome to the math lobby! join a branch
+            Welcome to the math lobby! Join a branch:
           </h1>
           <div className={styles.buttonflex}>
             <Link href="/app0">
